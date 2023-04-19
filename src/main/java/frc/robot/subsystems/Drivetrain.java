@@ -28,15 +28,17 @@ public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */
   public Drivetrain() {
     /* Defines variables */
-    frontLeftMotor = new CANSparkMax(0, MotorType.kBrushless);
-    backLeftMotor = new CANSparkMax(1, MotorType.kBrushless);
-    frontRightMotor = new CANSparkMax(2, MotorType.kBrushless);
-    backRightMotor = new CANSparkMax(3,MotorType.kBrushless);
+    frontLeftMotor = new CANSparkMax(3, MotorType.kBrushless);
+    backLeftMotor = new CANSparkMax(4, MotorType.kBrushless);
+    frontRightMotor = new CANSparkMax(7, MotorType.kBrushless);
+    backRightMotor = new CANSparkMax(8,MotorType.kBrushless);
 
     leftMotors = new MotorControllerGroup(frontLeftMotor, backLeftMotor);
     rightMotors = new MotorControllerGroup(frontRightMotor,backRightMotor);
 
     differentialDrive = new DifferentialDrive(leftMotors, rightMotors);
+
+    leftMotors.setInverted(true);
   }
 
   public void ArcadeDrive(double forwardSpeed, double turnSpeed) {
