@@ -57,6 +57,6 @@ public class RobotContainer {
 
    
   public Command getAutonomousCommand() {
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return Autos.exampleAuto(null);
   }
 }
