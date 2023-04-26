@@ -26,8 +26,8 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final Joystick Joystick1 = new Joystick(0);
   private final Joystick Joystick2 = new Joystick(1);
-  private final DriveTrain driveTrain = new DriveTrain();
-  private final DriveCommand DriveFRFR = new DriveCommand(Joystick1, Joystick2, driveTrain);
+  private final DriveTrain DriveTrain = new DriveTrain();
+  private final DriveCommand DriveFRFR = new DriveCommand(Joystick1, Joystick2, DriveTrain);
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -35,7 +35,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-
+    DriveTrain.setDefaultCommand(DriveFRFR);
     // Configure the trigger bindings
     configureBindings();
   }
