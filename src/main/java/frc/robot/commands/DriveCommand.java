@@ -19,12 +19,11 @@ public class DriveCommand extends CommandBase {
   private double turnSpeed;
 
   /** Creates a new DriveCommand. */
-  public DriveCommand(Drivetrain drivetrain) {
+  public DriveCommand(Drivetrain drivetrain, Joystick joystick1, Joystick joystick2) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drivetrain = drivetrain;
-
-    leftJoystick = new Joystick(0);
-    rightJoystick = new Joystick(1);
+    leftJoystick = joystick1;
+    rightJoystick = joystick2;
 
     addRequirements(drivetrain);
 

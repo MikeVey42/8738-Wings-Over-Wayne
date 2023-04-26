@@ -8,6 +8,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -22,8 +23,11 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
 
   private final Drivetrain m_Drivetrain = new Drivetrain();
+  private final Joystick m_LeftJoystick = new Joystick(0);
+  private final Joystick m_RightJoystick = new Joystick(1);
+  private final DriveCommand m_DriveCommand = new DriveCommand(m_Drivetrain, m_LeftJoystick, m_RightJoystick);
 
-  private final DriveCommand m_DriveCommand = new DriveCommand(m_Drivetrain);
+  
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandJoystick m_driverController = new CommandJoystick(OperatorConstants.kDriverControllerPort);
