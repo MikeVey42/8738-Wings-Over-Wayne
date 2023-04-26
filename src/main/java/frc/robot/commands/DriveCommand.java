@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -30,8 +31,8 @@ public class DriveCommand extends CommandBase {
   public void execute() {
     movement.getX();
     direction.getY();
-    double joystickforward = movement.getX();
-    double joystickturn = movement.getY();
+    double joystickforward = MathUtil.applyDeadband(movement.getX(), 0.1);
+    double joystickturn = MathUtil.applyDeadband(direction.getY(), 0.1);
     driveTrain.yes(joystickforward,joystickturn);
   }
 
