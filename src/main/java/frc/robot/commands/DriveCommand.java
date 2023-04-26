@@ -15,6 +15,7 @@ public class DriveCommand extends CommandBase {
   Joystick direction;
 
   public DriveCommand(DriveTrain subsystem, Joystick forwardback, Joystick turning) {
+    addRequirements(subsystem);
     driveTrain = subsystem;
     movement = forwardback;
     direction = turning;
