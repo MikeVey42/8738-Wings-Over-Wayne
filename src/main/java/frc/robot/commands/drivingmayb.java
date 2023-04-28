@@ -17,6 +17,7 @@ public class drivingmayb extends CommandBase {
     drivy = driving;
     turnsstick = turny;
     forwardsstick = forwardy;
+    addRequirements(drivy);
   }
 
   // Called when the command is initially scheduled.
