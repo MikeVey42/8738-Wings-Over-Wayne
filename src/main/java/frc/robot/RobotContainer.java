@@ -7,11 +7,15 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.dotheClawBackward;
+import frc.robot.commands.dotheClawForward;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.itstheClaw;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -23,9 +27,18 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
 
   private final Drivetrain m_Drivetrain = new Drivetrain();
+  private final itstheClaw m_Claw = new itstheClaw();
+
   private final Joystick m_LeftJoystick = new Joystick(0);
   private final Joystick m_RightJoystick = new Joystick(1);
+  private final Joystick m_ClawJoystick = new Joystick(2);
+
+  private final Trigger m_ClawForwardTrigger = new JoystickButton(m_ClawJoystick, 1);
+  private final Trigger m_ClawBackwardTrigger = new JoystickButton(m_ClawJoystick, 2);
+
   private final DriveCommand m_DriveCommand = new DriveCommand(m_Drivetrain, m_LeftJoystick, m_RightJoystick);
+  private final dotheClawForward m_ClawForward = new dotheClawForward(m_Claw, m_ClawJoystick);
+  private final dotheClawBackward m_ClawBackward = new dotheClawBackward(m_Claw, m_ClawJoystick);
 
   
 
@@ -50,7 +63,8 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    
+    m_ClawForwardTrigger.onTrue(m_ClawForward);
+    m_ClawBackwardTrigger.onTrue(m_ClawBackward);
   }
 
   /**
