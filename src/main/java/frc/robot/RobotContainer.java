@@ -38,7 +38,7 @@ public class RobotContainer {
   public DriveCommand controls = new DriveCommand(driveSubsystem, forwardStick, turningStick);
   public JoystickButton upelbow = new JoystickButton(forwardStick, 1);
   public JoystickButton zerobutton = new JoystickButton(forwardStick, 2);
-  public ElbowCommand pos = new ElbowCommand(elbowSystem, 5);
+  public ElbowCommand pos = new ElbowCommand(elbowSystem, 0);
   public zeroelbow makezero = new zeroelbow(elbowSystem);
   
   // Replace with CommandPS4Controller or CommandJoystick if needed

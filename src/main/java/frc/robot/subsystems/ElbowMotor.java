@@ -20,7 +20,7 @@ public class ElbowMotor extends SubsystemBase {
     elbow = new CANSparkMax(6, MotorType.kBrushless);
     turn = elbow.getEncoder();
     turn2 = elbow.getPIDController();
-    turn2.setP(0.1);
+    turn2.setP(0.5);
 
   }
 
