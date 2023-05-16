@@ -28,7 +28,6 @@ public class DriveTrain extends SubsystemBase {
 
   public void yes(double speed, double turnspeed) {
     drive.arcadeDrive(speed, turnspeed, false);
-
   }
 
   @Override
