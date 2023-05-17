@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.Crab_Claw;
 
 public class Crab_Claw_command extends CommandBase {
@@ -16,17 +17,16 @@ public class Crab_Claw_command extends CommandBase {
   private boolean CloseClawBoolean; 
   private Crab_Claw Crab_Claw;
   /** Creates a new Crab_Claw_command. */
-  public Crab_Claw_command() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public Crab_Claw_command(JoystickButton Button3, JoystickButton Button4) {
+    // Use addRequirements() here to declare subsystem dependencies.    
+    OpenClawTrigger = Button3;
+    CloseClawTrigger = Button4;
   }
-  private void getJoysticks(Joystick joystick3){
-    OpenClawTrigger = new JoystickButton(joystick3,3);
-    CloseClawTrigger = new JoystickButton(joystick3,4);
-  }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    getJoysticks();
+    Crab_Claw.clawClose();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

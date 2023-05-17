@@ -26,10 +26,10 @@ public class Crab_Claw extends SubsystemBase {
     }
   
   public void clawOpen(){
-    setReference(5 ,CANSparkMax.ControlType.kPosition);
+    PID.setReference(5 ,CANSparkMax.ControlType.kPosition);
   }
   public void clawClose(){
-    setReference(-5 ,CANSparkMax.ControlType.kPosition);
+    PID.setReference(-5 ,CANSparkMax.ControlType.kPosition);
   }
 
 @Override
