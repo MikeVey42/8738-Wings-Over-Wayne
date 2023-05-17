@@ -21,6 +21,7 @@ public class Crab_Claw_command extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.    
     OpenClawTrigger = Button3;
     CloseClawTrigger = Button4;
+    addRequirements(Crab_Claw);
   }
 
   // Called when the command is initially scheduled.
