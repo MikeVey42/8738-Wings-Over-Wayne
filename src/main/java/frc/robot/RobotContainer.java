@@ -7,7 +7,9 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.clawMovey;
 import frc.robot.commands.drivingmayb;
+import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -27,8 +29,11 @@ public class RobotContainer {
   private final Drivetrain drivin = new Drivetrain();
   private final Joystick jooble = new Joystick(0);
   private final Joystick jiible = new Joystick(1);
+  private final Joystick drable = new Joystick(2);
   private final drivingmayb dridle = new drivingmayb(drivin, jiible, jooble);
   
+  private final Claw clawbing = new Claw();
+  private final clawMovey ceruwuiro = new clawMovey(clawbing, drable);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -39,6 +44,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     drivin.setDefaultCommand(dridle);
+    clawbing.setDefaultCommand(ceruwuiro);
   }
 
   /**
