@@ -9,6 +9,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,6 +21,8 @@ public class Elevator extends SubsystemBase {
 
   private RelativeEncoder elvEncoder1, elvEncoder2;
   private SparkMaxPIDController elvController1, elvController2;
+
+  private DigitalInput limitSwitch1, limitSwitch2;
 
 
   /** Creates a new Elevator. */
@@ -37,6 +40,8 @@ public class Elevator extends SubsystemBase {
     elvController1 = elvMotor1.getPIDController();
     elvController2 = elvMotor2.getPIDController();
 
+    limitSwitch1 = new DigitalInput(9);
+    limitSwitch2 = new DigitalInput(8);
 
   }
 

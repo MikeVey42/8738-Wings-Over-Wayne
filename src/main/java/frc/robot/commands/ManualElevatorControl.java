@@ -34,7 +34,7 @@ public class ManualElevatorControl extends CommandBase {
   @Override
   public void execute() {
 
-    elvSpeed = m_elvJoystick.getX();
+    elvSpeed = m_elvJoystick.getY();
 
     m_elevator.manualElevator(elvSpeed);
 
