@@ -24,7 +24,9 @@ public class Crab_Claw extends SubsystemBase {
     PID = CrabMotor.getPIDController();
     PID.setP(0.1);
     }
-  
+  public void spin(){
+    CrabMotor.set(-0.4);
+  }
   public void clawOpen(){
     PID.setReference(36 ,CANSparkMax.ControlType.kPosition);
   }
