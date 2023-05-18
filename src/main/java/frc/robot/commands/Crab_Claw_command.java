@@ -17,10 +17,11 @@ public class Crab_Claw_command extends CommandBase {
   private boolean CloseClawBoolean; 
   private Crab_Claw Crab_Claw;
   /** Creates a new Crab_Claw_command. */
-  public Crab_Claw_command(JoystickButton Button3, JoystickButton Button4) {
+  public Crab_Claw_command(JoystickButton Button3, JoystickButton Button4, Crab_Claw Crab_Claw) {
     // Use addRequirements() here to declare subsystem dependencies.    
     OpenClawTrigger = Button3;
     CloseClawTrigger = Button4;
+    this.Crab_Claw = Crab_Claw;
     addRequirements(Crab_Claw);
   }
 

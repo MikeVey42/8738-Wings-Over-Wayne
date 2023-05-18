@@ -18,18 +18,18 @@ public class Crab_Claw extends SubsystemBase {
   private SparkMaxPIDController PID;
   private CANSparkMax CrabMotor;
 
-  private Crab_Claw() {
+  public Crab_Claw() {
     CrabMotor = new CANSparkMax(9, MotorType.kBrushless);
     Encoder = CrabMotor.getEncoder();
     PID = CrabMotor.getPIDController();
-    
+    PID.setP(0.1);
     }
   
   public void clawOpen(){
-    PID.setReference(5 ,CANSparkMax.ControlType.kPosition);
+    PID.setReference(36 ,CANSparkMax.ControlType.kPosition);
   }
   public void clawClose(){
-    PID.setReference(-5 ,CANSparkMax.ControlType.kPosition);
+    PID.setReference(0 ,CANSparkMax.ControlType.kPosition);
   }
 
 @Override
