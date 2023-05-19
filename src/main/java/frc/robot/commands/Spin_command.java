@@ -16,6 +16,7 @@ public class Spin_command extends CommandBase {
   public Spin_command(Crab_Claw Crab_Claw) {
     this.Crab_Claw = Crab_Claw;
     Spin_Timer = new Timer();
+    addRequirements(Crab_Claw);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -33,7 +34,9 @@ public class Spin_command extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    Crab_Claw.setDefault();
+  }
 
   // Returns true when the command should end.
   @Override

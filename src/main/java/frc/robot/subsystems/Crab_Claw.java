@@ -33,7 +33,9 @@ public class Crab_Claw extends SubsystemBase {
   public void clawClose(){
     PID.setReference(0 ,CANSparkMax.ControlType.kPosition);
   }
-
+  public void setDefault(){
+    Encoder.setPosition(0);
+  }
 @Override
   public void periodic() {
     // This method will be called once per scheduler run
