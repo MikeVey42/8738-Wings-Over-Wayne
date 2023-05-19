@@ -6,6 +6,10 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.Crab_Claw_command;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Spin_command;
+import frc.robot.subsystems.Crab_Claw;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
@@ -13,6 +17,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -24,13 +29,20 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
+  Joystick thirdJoystick = new Joystick(2);
+  JoystickButton Button3 = new JoystickButton(thirdJoystick, 4);
+  JoystickButton Button4 = new JoystickButton(thirdJoystick, 5);
+  Crab_Claw Crab_Claw =  new Crab_Claw();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final Crab_Claw_command Crab_Claw_command = new Crab_Claw_command(Button3, Button4, Crab_Claw);
+  private final Spin_command Spin_command = new Spin_command(Crab_Claw);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    Crab_Claw.setDefaultCommand(Crab_Claw_command);
+    // Configure the trigger bindings
     configureBindings();
   }
 
@@ -60,6 +72,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return Spin_command;
   }
 }
