@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Auto_Drive;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Crab_Claw_command;
 import frc.robot.commands.ExampleCommand;
@@ -14,6 +15,7 @@ import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ElbowCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.zeroelbow;
+import frc.robot.commands.comandGroups.Auto;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElbowMotor;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -54,6 +56,7 @@ public class RobotContainer {
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final Crab_Claw_command Crab_Claw_command = new Crab_Claw_command(Button3, Button4, Crab_Claw);
   private final Spin_command Spin_command = new Spin_command(Crab_Claw);
+  private final Auto Auto = new Auto(Crab_Claw, driveSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -84,6 +87,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Spin_command;
+    return Auto;
   }
 }
