@@ -4,6 +4,11 @@
 
 package frc.robot;
 
+
+import frc.robot.commands.GoToRef;
+import frc.robot.commands.ManualElevatorControl;
+import frc.robot.commands.SetElevator;
+import frc.robot.subsystems.Elevator;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Auto_Drive;
 import frc.robot.commands.Autos;
@@ -36,18 +41,30 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  
+  public Joystick forwardStick = new Joystick(0);
+  public Joystick turningStick = new Joystick(1);
+  public Joystick thirdJoystick = new Joystick(2);
+  
+  public JoystickButton Button3 = new JoystickButton(thirdJoystick, 4);
+  public JoystickButton Button4 = new JoystickButton(thirdJoystick, 5);
+  public JoystickButton upelbow = new JoystickButton(forwardStick, 1);
+  public JoystickButton zerobutton = new JoystickButton(forwardStick, 2);
+  
+  private static Elevator m_Elevator = new Elevator();
+
+  private static ManualElevatorControl m_ManualElevatorControl = new ManualElevatorControl(m_Elevator, thirdJoystick);
+  private static SetElevator m_SetElevator = new SetElevator(m_Elevator);
+  private static GoToRef m_GoToRef = new GoToRef(m_Elevator);
+  
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  Joystick thirdJoystick = new Joystick(2);
-  JoystickButton Button3 = new JoystickButton(thirdJoystick, 4);
-  JoystickButton Button4 = new JoystickButton(thirdJoystick, 5);
+
   Crab_Claw Crab_Claw =  new Crab_Claw();
   public DriveTrain driveSubsystem = new DriveTrain();
   public ElbowMotor elbowSystem = new ElbowMotor();
-  public Joystick forwardStick = new Joystick(0);
-  public Joystick turningStick = new Joystick(1);
+
   public DriveCommand controls = new DriveCommand(driveSubsystem, forwardStick, turningStick);
-  public JoystickButton upelbow = new JoystickButton(forwardStick, 1);
-  public JoystickButton zerobutton = new JoystickButton(forwardStick, 2);
+
   public ElbowCommand pos = new ElbowCommand(elbowSystem, 0);
   public zeroelbow makezero = new zeroelbow(elbowSystem);
   
@@ -63,6 +80,8 @@ public class RobotContainer {
     Crab_Claw.setDefaultCommand(Crab_Claw_command);
     // Configure the trigger bindings
     configureBindings();
+
+    m_Elevator.setDefaultCommand(m_ManualElevatorControl);
   }
 
   /**
