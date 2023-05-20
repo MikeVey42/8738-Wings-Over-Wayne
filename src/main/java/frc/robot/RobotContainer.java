@@ -4,11 +4,29 @@
 
 package frc.robot;
 
-import frc.robot.commands.Autos;
+
 import frc.robot.commands.GoToRef;
 import frc.robot.commands.ManualElevatorControl;
 import frc.robot.commands.SetElevator;
 import frc.robot.subsystems.Elevator;
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Auto_Drive;
+import frc.robot.commands.Autos;
+import frc.robot.commands.Crab_Claw_command;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Spin_command;
+import frc.robot.subsystems.Crab_Claw;
+import frc.robot.commands.DriveCommand;
+import frc.robot.commands.ElbowCommand;
+import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.zeroelbow;
+import frc.robot.commands.comandGroups.Auto;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.ElbowMotor;
+import frc.robot.subsystems.ExampleSubsystem;
+
+import javax.swing.text.Position;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -23,19 +41,43 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  
+  public Joystick forwardStick = new Joystick(0);
+  public Joystick turningStick = new Joystick(1);
+  public Joystick thirdJoystick = new Joystick(2);
+  
+  public JoystickButton Button3 = new JoystickButton(thirdJoystick, 4);
+  public JoystickButton Button4 = new JoystickButton(thirdJoystick, 5);
+  public JoystickButton upelbow = new JoystickButton(forwardStick, 1);
+  public JoystickButton zerobutton = new JoystickButton(forwardStick, 2);
+  
   private static Elevator m_Elevator = new Elevator();
 
-  private static Joystick m_LJoystick = new Joystick(0);
-  private static Joystick m_RJoystick = new Joystick(1);
-  private static Joystick m_ElvJoystick = new Joystick(2);
-
-  private static ManualElevatorControl m_ManualElevatorControl = new ManualElevatorControl(m_Elevator, m_ElvJoystick);
+  private static ManualElevatorControl m_ManualElevatorControl = new ManualElevatorControl(m_Elevator, thirdJoystick);
   private static SetElevator m_SetElevator = new SetElevator(m_Elevator);
   private static GoToRef m_GoToRef = new GoToRef(m_Elevator);
   
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
+  Crab_Claw Crab_Claw =  new Crab_Claw();
+  public DriveTrain driveSubsystem = new DriveTrain();
+  public ElbowMotor elbowSystem = new ElbowMotor();
+
+  public DriveCommand controls = new DriveCommand(driveSubsystem, forwardStick, turningStick);
+
+  public ElbowCommand pos = new ElbowCommand(elbowSystem, 0);
+  public zeroelbow makezero = new zeroelbow(elbowSystem);
+  
+  // Replace with CommandPS4Controller or CommandJoystick if needed
+  private final CommandXboxController m_driverController =
+      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final Crab_Claw_command Crab_Claw_command = new Crab_Claw_command(Button3, Button4, Crab_Claw);
+  private final Spin_command Spin_command = new Spin_command(Crab_Claw);
+  private final Auto Auto = new Auto(Crab_Claw, driveSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    Crab_Claw.setDefaultCommand(Crab_Claw_command);
     // Configure the trigger bindings
     configureBindings();
 
@@ -52,8 +94,8 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-
-
+    upelbow.onTrue(pos);
+    zerobutton.onTrue(makezero);
 
   }
 
@@ -64,6 +106,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(null);
+    return Auto;
   }
 }
