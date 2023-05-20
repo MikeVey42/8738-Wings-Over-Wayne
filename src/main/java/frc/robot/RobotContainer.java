@@ -18,6 +18,7 @@ import frc.robot.commands.Spin_command;
 import frc.robot.subsystems.Crab_Claw;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ElbowCommand;
+import frc.robot.commands.Elbow_Spin_Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.zeroelbow;
 import frc.robot.commands.comandGroups.Auto;
@@ -46,34 +47,35 @@ public class RobotContainer {
   public Joystick turningStick = new Joystick(1);
   public Joystick thirdJoystick = new Joystick(2);
   
-  public JoystickButton Button3 = new JoystickButton(thirdJoystick, 4);
-  public JoystickButton Button4 = new JoystickButton(thirdJoystick, 5);
+  public JoystickButton ElbowButton1 = new JoystickButton(thirdJoystick, 8);
+  public JoystickButton ElbowButton2 = new JoystickButton(thirdJoystick, 9);
+  public JoystickButton Button3 = new JoystickButton(thirdJoystick, 3);
+  public JoystickButton Button4 = new JoystickButton(thirdJoystick, 4);
   public JoystickButton upelbow = new JoystickButton(forwardStick, 1);
   public JoystickButton zerobutton = new JoystickButton(forwardStick, 2);
   
-  private static Elevator m_Elevator = new Elevator();
+  private Elevator m_Elevator = new Elevator();
 
-  private static ManualElevatorControl m_ManualElevatorControl = new ManualElevatorControl(m_Elevator, thirdJoystick);
-  private static SetElevator m_SetElevator = new SetElevator(m_Elevator);
-  private static GoToRef m_GoToRef = new GoToRef(m_Elevator);
+  private ManualElevatorControl m_ManualElevatorControl = new ManualElevatorControl(m_Elevator, thirdJoystick);
+  private SetElevator m_SetElevator = new SetElevator(m_Elevator);
+  private GoToRef m_GoToRef = new GoToRef(m_Elevator);
   
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   Crab_Claw Crab_Claw =  new Crab_Claw();
   public DriveTrain driveSubsystem = new DriveTrain();
   public ElbowMotor elbowSystem = new ElbowMotor();
+  public Elbow_Spin_Command elbow_Spin_Command = new Elbow_Spin_Command(elbowSystem);
 
   public DriveCommand controls = new DriveCommand(driveSubsystem, forwardStick, turningStick);
 
-  public ElbowCommand pos = new ElbowCommand(elbowSystem, 0);
+  public ElbowCommand pos = new ElbowCommand(elbowSystem, 0, ElbowButton1, ElbowButton2);
   public zeroelbow makezero = new zeroelbow(elbowSystem);
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final Crab_Claw_command Crab_Claw_command = new Crab_Claw_command(Button3, Button4, Crab_Claw);
   private final Spin_command Spin_command = new Spin_command(Crab_Claw);
-  private final Auto Auto = new Auto(Crab_Claw, driveSubsystem);
+  private final Auto Auto = new Auto(Crab_Claw, driveSubsystem, elbowSystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -82,6 +84,7 @@ public class RobotContainer {
     configureBindings();
 
     m_Elevator.setDefaultCommand(m_ManualElevatorControl);
+    driveSubsystem.setDefaultCommand(controls);
   }
 
   /**

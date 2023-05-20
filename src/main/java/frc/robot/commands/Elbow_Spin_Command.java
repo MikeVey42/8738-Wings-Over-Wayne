@@ -6,43 +6,41 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Crab_Claw;
+import frc.robot.subsystems.ElbowMotor;
 
-
-public class Spin_command extends CommandBase {
-  Crab_Claw Crab_Claw;
-  Timer Spin_Timer;
-  /** Creates a new Spin_command. */
-  public Spin_command(Crab_Claw Crab_Claw) {
-    this.Crab_Claw = Crab_Claw;
-    Spin_Timer = new Timer();
-    addRequirements(Crab_Claw);
+public class Elbow_Spin_Command extends CommandBase {
+  Timer elbowTimer;
+  ElbowMotor elbowMotor;
+  /** Creates a new Elbow_Spin_Command. */
+  public Elbow_Spin_Command(ElbowMotor elbowMotor) {
+    this.elbowMotor = elbowMotor;
+    elbowTimer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(elbowMotor);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Spin_Timer.restart();
+    elbowTimer.restart();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Crab_Claw.spin();
+    elbowMotor.spin();
   }
-
+  
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Crab_Claw.setDefault();
-    Crab_Claw.spinStop();
+    elbowMotor.setDefault();
+    elbowMotor.spinStop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-  
-    return 1 <= Spin_Timer.get();
+    return 2 <= elbowTimer.get();
   }
 }

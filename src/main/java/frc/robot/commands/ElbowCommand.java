@@ -4,30 +4,51 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.ElbowMotor;
 public class ElbowCommand extends CommandBase {
   ElbowMotor elbowMotor;
   double position;
-  
 
-  public ElbowCommand(ElbowMotor motorsubs, double pos) {
+  Boolean ArmUp;
+  Boolean ArmDown;
+
+  JoystickButton armUpTrigger;
+  JoystickButton armDownTrigger;
+
+
+  public ElbowCommand(ElbowMotor motorsubs, double pos, JoystickButton button1, JoystickButton button2) {
     addRequirements(motorsubs);
     elbowMotor = motorsubs;
     position = pos;
 
+    armUpTrigger = button1;
+    armDownTrigger = button2;
   }
 
 
   @Override
   public void initialize() {
-    elbowMotor.elbowyes(position);
-    
+    elbowMotor.moveUp();
+    elbowMotor.elbowYes(position);
+
   }
 
   
   @Override
-  public void execute() {}
+  public void execute() {
+    ArmUp = armUpTrigger.getAsBoolean();
+    ArmDown = armDownTrigger.getAsBoolean();
+    if (ArmUp == true){
+      elbowMotor.moveUp();;
+    }
+    else if (ArmDown == true){
+      elbowMotor.moveDown();
+    }
+  }
 
   
   @Override
