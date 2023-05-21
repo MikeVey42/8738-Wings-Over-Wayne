@@ -20,11 +20,12 @@ public class ElbowMotor extends SubsystemBase {
     elbow = new CANSparkMax(6, MotorType.kBrushless);
     turn = elbow.getEncoder();
     turn2 = elbow.getPIDController();
-    turn2.setP(0.5);
+    turn2.setP(0.3);
+    turn2.setOutputRange(-0.5, 0.5);
 
   }
   public void spin(){
-    elbow.set(-0.4);
+    elbow.set(-0.1);
   }
   public void spinStop(){
     elbow.set(0.0);
@@ -37,10 +38,10 @@ public class ElbowMotor extends SubsystemBase {
     turn2.setReference(position,ControlType.kPosition);
   }
   public void moveDown(){
-    turn2.setReference(22.685 ,CANSparkMax.ControlType.kPosition);
+    turn2.setReference(25 ,CANSparkMax.ControlType.kPosition);
   }
   public void moveUp(){
-    turn2.setReference(0, CANSparkMax.ControlType.kPosition);
+    turn2.setReference(5, CANSparkMax.ControlType.kPosition);
   }
   public void upAuto(){
 

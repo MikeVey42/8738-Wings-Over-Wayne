@@ -4,43 +4,50 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Gyro;
 
-public class Auto_Drive extends CommandBase {
+public class autoBalance extends CommandBase {
+  /** Creates a new autoBalance. */
+  private Gyro Gyro;
+  private double initialGyroPitch;
+  private double GyroPitch;
   private DriveTrain DriveTrain; 
-  private Timer Auto_Timer; 
-  /** Creates a new Auto_Drive. */
-  public Auto_Drive(DriveTrain DriveTrain) {
+
+  public autoBalance(Gyro Gyro, DriveTrain DriveTrain) {
+    this.Gyro = Gyro; 
     this.DriveTrain = DriveTrain;
-    Auto_Timer = new Timer();
-    addRequirements(DriveTrain);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Auto_Timer.reset();
-    Auto_Timer.start();
+    initialGyroPitch = Gyro.getPitch();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {  
-    DriveTrain.yes(-.3, 0);
+  public void execute() {
+    GyroPitch = Gyro.getPitch();
+    if (GyroPitch == initialGyroPitch){
+      DriveTrain.yes(-.2, 0);
+    }
+    else if (GyroPitch >= initialGyroPitch){
+      DriveTrain.yes(-0.2, 0);
+    
+    }
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    DriveTrain.yes(0,0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Auto_Timer.get() >= 2;
+    return false;
   }
 }

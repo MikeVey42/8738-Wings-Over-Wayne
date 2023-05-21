@@ -30,9 +30,11 @@ public class Elevator extends SubsystemBase {
     elvMotor1 = new CANSparkMax(1, MotorType.kBrushless);
     elvMotor2 = new CANSparkMax(2, MotorType.kBrushless);
 
-    elvMotor2.setInverted(true);
+    elvMotor1.setInverted(true);
+    elvMotor2.setInverted(false);
 
     elvGroup = new MotorControllerGroup(elvMotor1, elvMotor2);
+
 
     elvEncoder1 = elvMotor1.getEncoder();
     elvEncoder2 = elvMotor2.getEncoder();

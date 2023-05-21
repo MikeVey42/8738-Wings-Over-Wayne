@@ -41,6 +41,6 @@ public class Elbow_Spin_Command extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return 2 <= elbowTimer.get();
+    return 1 <= elbowTimer.get();
   }
 }

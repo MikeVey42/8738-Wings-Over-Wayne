@@ -31,8 +31,8 @@ public class DriveCommand extends CommandBase {
   public void execute() {
     movement.getX();
     direction.getY();
-    double joystickforward = MathUtil.applyDeadband(movement.getX(), 0.1);
-    double joystickturn = MathUtil.applyDeadband(direction.getY(), 0.1);
+    double joystickforward = MathUtil.applyDeadband(movement.getY(), 0.1);
+    double joystickturn = MathUtil.applyDeadband(direction.getX(), 0.1);
     driveTrain.yes(joystickforward,joystickturn);
   }
 

@@ -23,11 +23,12 @@ public class DriveTrain extends SubsystemBase {
     backrightmotor = new CANSparkMax(8, MotorType.kBrushless);
     controllerleft = new MotorControllerGroup(frontleftmotor, backleftmotor);
     controllerright = new MotorControllerGroup(frontrightmotor, backrightmotor);
+    controllerleft.setInverted(true);
     drive = new DifferentialDrive(controllerleft, controllerright);
   }
 
   public void yes(double speed, double turnspeed) {
-    drive.arcadeDrive(speed, turnspeed, false);
+    drive.arcadeDrive(speed, turnspeed, true);
   }
 
   @Override

@@ -57,6 +57,6 @@ public class ElbowCommand extends CommandBase {
   
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

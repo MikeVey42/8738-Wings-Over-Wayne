@@ -66,7 +66,6 @@ public class RobotContainer {
   public DriveTrain driveSubsystem = new DriveTrain();
   public ElbowMotor elbowSystem = new ElbowMotor();
   public Elbow_Spin_Command elbow_Spin_Command = new Elbow_Spin_Command(elbowSystem);
-
   public DriveCommand controls = new DriveCommand(driveSubsystem, forwardStick, turningStick);
 
   public ElbowCommand pos = new ElbowCommand(elbowSystem, 0, ElbowButton1, ElbowButton2);
@@ -82,7 +81,7 @@ public class RobotContainer {
     Crab_Claw.setDefaultCommand(Crab_Claw_command);
     // Configure the trigger bindings
     configureBindings();
-
+    elbowSystem.setDefaultCommand(pos);
     m_Elevator.setDefaultCommand(m_ManualElevatorControl);
     driveSubsystem.setDefaultCommand(controls);
   }
