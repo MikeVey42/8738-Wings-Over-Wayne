@@ -35,7 +35,7 @@ public class limelight extends SubsystemBase {
   }
   public void setPipeline(double pipelineVariable){
     pipeline.setDouble(pipelineVariable);
-    
+
   }
   @Override
   public void periodic() {
