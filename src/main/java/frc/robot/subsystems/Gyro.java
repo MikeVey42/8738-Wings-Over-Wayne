@@ -5,14 +5,25 @@ import com.kauailabs.navx.frc.AHRS.SerialDataType;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 
 public class Gyro extends SubsystemBase {
   /** Creates a new Gyro. */
   private final AHRS m_gyro;
 
+  private ShuffleboardTab SBtab;
+  private SimpleWidget ShufWidg;
+
+
+
+
   public Gyro() {
     m_gyro = new AHRS(SerialPort.Port.kUSB1, SerialDataType.kProcessedData, (byte) 60);
     m_gyro.enableLogging(true);
+    SBtab = Shuffleboard.getTab("dAvid");
+    ShufWidg = SBtab.add("Flipped?",false);
   }
 
   public double getYaw(){
