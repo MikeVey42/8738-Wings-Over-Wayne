@@ -21,7 +21,7 @@ import frc.robot.commands.ElbowCommand;
 import frc.robot.commands.Elbow_Spin_Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.zeroelbow;
-import frc.robot.commands.comandGroups.Auto;
+import frc.robot.commands.commandGroups.Auto;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElbowMotor;
 import frc.robot.subsystems.ExampleSubsystem;
