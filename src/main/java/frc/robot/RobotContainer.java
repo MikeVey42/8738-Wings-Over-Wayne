@@ -62,7 +62,7 @@ public class RobotContainer {
   
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  Crab_Claw Crab_Claw =  new Crab_Claw();
+  public Crab_Claw Crab_Claw =  new Crab_Claw();
   public DriveTrain driveSubsystem = new DriveTrain();
   public ElbowMotor elbowSystem = new ElbowMotor();
   public Elbow_Spin_Command elbow_Spin_Command = new Elbow_Spin_Command(elbowSystem);
@@ -71,7 +71,6 @@ public class RobotContainer {
   public ElbowCommand pos = new ElbowCommand(elbowSystem, 0, ElbowButton1, ElbowButton2);
   public zeroelbow makezero = new zeroelbow(elbowSystem);
   
-  // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Crab_Claw_command Crab_Claw_command = new Crab_Claw_command(Button3, Button4, Crab_Claw);
   private final Spin_command Spin_command = new Spin_command(Crab_Claw);
   private final Auto Auto = new Auto(Crab_Claw, driveSubsystem, elbowSystem);

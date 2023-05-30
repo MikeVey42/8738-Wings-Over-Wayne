@@ -6,6 +6,7 @@ package frc.robot.commands.comandGroups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.Auto_Drive;
+import frc.robot.commands.Auto_Spinny;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.Elbow_Spin_Command;
 import frc.robot.commands.Spin_command;
@@ -24,8 +25,9 @@ public class Auto extends ParallelCommandGroup {
     Spin_command Spin_command = new Spin_command(Crab_Claw);
     Auto_Drive Auto_Drive = new Auto_Drive(drivesubsystem);
     Elbow_Spin_Command Auto_up = new Elbow_Spin_Command(elbowMotor);
+    Auto_Spinny Auto_Spinny = new Auto_Spinny(drivesubsystem);
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(Spin_command, Auto_Drive, Auto_up);
+    addCommands(Spin_command, Auto_Drive, Auto_up, Auto_Spinny);
   }
 }
