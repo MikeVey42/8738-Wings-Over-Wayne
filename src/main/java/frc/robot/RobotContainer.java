@@ -22,9 +22,11 @@ import frc.robot.commands.Elbow_Spin_Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.zeroelbow;
 import frc.robot.commands.comandGroups.Auto;
+import frc.robot.commands.comandGroups.Auto_Sequence;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElbowMotor;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Gyro;
 
 import javax.swing.text.Position;
 
@@ -55,7 +57,6 @@ public class RobotContainer {
   public JoystickButton zerobutton = new JoystickButton(forwardStick, 2);
   
   private Elevator m_Elevator = new Elevator();
-
   private ManualElevatorControl m_ManualElevatorControl = new ManualElevatorControl(m_Elevator, thirdJoystick);
   private SetElevator m_SetElevator = new SetElevator(m_Elevator);
   private GoToRef m_GoToRef = new GoToRef(m_Elevator);
@@ -63,17 +64,24 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   public Crab_Claw Crab_Claw =  new Crab_Claw();
+
+  public Gyro Gyro = new Gyro();
+
   public DriveTrain driveSubsystem = new DriveTrain();
+
   public ElbowMotor elbowSystem = new ElbowMotor();
   public Elbow_Spin_Command elbow_Spin_Command = new Elbow_Spin_Command(elbowSystem);
-  public DriveCommand controls = new DriveCommand(driveSubsystem, forwardStick, turningStick);
-
   public ElbowCommand pos = new ElbowCommand(elbowSystem, 0, ElbowButton1, ElbowButton2);
+  
+  public DriveCommand controls = new DriveCommand(driveSubsystem, forwardStick, turningStick);
+ 
   public zeroelbow makezero = new zeroelbow(elbowSystem);
   
   private final Crab_Claw_command Crab_Claw_command = new Crab_Claw_command(Button3, Button4, Crab_Claw);
   private final Spin_command Spin_command = new Spin_command(Crab_Claw);
+
   private final Auto Auto = new Auto(Crab_Claw, driveSubsystem, elbowSystem);
+  private final Auto_Sequence Auto2 = new Auto_Sequence(driveSubsystem, Gyro);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

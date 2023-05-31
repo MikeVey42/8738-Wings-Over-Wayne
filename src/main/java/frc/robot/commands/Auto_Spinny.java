@@ -33,6 +33,7 @@ public class Auto_Spinny extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    
     m_drivetrain.yes(0, -0.4);
   }
 
