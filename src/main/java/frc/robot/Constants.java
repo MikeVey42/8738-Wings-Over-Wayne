@@ -28,5 +28,9 @@ public final class Constants {
     public static final int LOOP_BOTTOM_END = -1;
     public static final int LOOP_LEFT_START = -1;
     public static final int LOOP_LEFT_END = -1;
+    public static final int LOOP_RIGHT_START = -1;
+    public static final int LOOP_RIGHT_END = -1;
+
+
   }
 }
