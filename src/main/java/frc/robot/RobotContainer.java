@@ -8,6 +8,7 @@ package frc.robot;
 import frc.robot.commands.GoToRef;
 import frc.robot.commands.ManualElevatorControl;
 import frc.robot.commands.SetElevator;
+import frc.robot.commands.Spin360;
 import frc.robot.subsystems.Elevator;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Auto_Drive;
@@ -22,6 +23,7 @@ import frc.robot.commands.Elbow_Spin_Command;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.zeroelbow;
 import frc.robot.commands.comandGroups.Auto;
+import frc.robot.commands.comandGroups.SequenceCommandGroup;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ElbowMotor;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -53,6 +55,7 @@ public class RobotContainer {
   public JoystickButton Button4 = new JoystickButton(thirdJoystick, 4);
   public JoystickButton upelbow = new JoystickButton(forwardStick, 1);
   public JoystickButton zerobutton = new JoystickButton(forwardStick, 2);
+  public JoystickButton spinButton = new JoystickButton(turningStick, 4);
   
   private Elevator m_Elevator = new Elevator();
 
@@ -74,7 +77,10 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Crab_Claw_command Crab_Claw_command = new Crab_Claw_command(Button3, Button4, Crab_Claw);
   private final Spin_command Spin_command = new Spin_command(Crab_Claw);
+  private final Spin360 Spin360 = new Spin360(spinButton);
+  
   private final Auto Auto = new Auto(Crab_Claw, driveSubsystem, elbowSystem);
+  private final SequenceCommandGroup AutoSequence = new SequenceCommandGroup(Crab_Claw, driveSubsystem, elbowSystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -108,6 +114,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Auto;
+    return AutoSequence;
   }
 }
