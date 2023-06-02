@@ -45,6 +45,13 @@ Buffer = new AddressableLEDBuffer(LedAmount);
   public Color receiveLEDColor(int Position){
     return Buffer.getLED(Position);
   }
+  public void turnOffLED(){
+    for(int y = 0; y < 80; y++){
+      ChangeLEDLight(y, Color.kBlack);
+    }
+    PushLEDupdate();
+  }
+
 
   /**
    * Applies a pattern to all the LEDs of the robot
