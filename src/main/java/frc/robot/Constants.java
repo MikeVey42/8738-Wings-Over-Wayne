@@ -16,4 +16,17 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+
+  public static class LEDConstants {
+    public static final int LEFT_STRIP_START = -1;
+    public static final int LEFT_STRIP_END = -1;
+    public static final int RIGHT_STRIP_START = -1;
+    public static final int RIGHT_STRIP_END = -1;
+    public static final int LOOP_TOP_START = -1;
+    public static final int LOOP_TOP_END = -1;
+    public static final int LOOP_BOTTOM_START = -1;
+    public static final int LOOP_BOTTOM_END = -1;
+    public static final int LOOP_LEFT_START = -1;
+    public static final int LOOP_LEFT_END = -1;
+  }
 }
